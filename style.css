@@ -661,8 +661,9 @@ button {
         gap: 30px;
     }
     .proyecto-top-row {
-        display: flex;
-        flex-direction: column;
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: 1fr !important;
         gap: 0;
     }
     .proyecto-left-info {
