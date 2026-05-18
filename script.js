@@ -497,35 +497,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.stopPropagation();
                 currentLbIndex = (currentLbIndex < fpData.length - 1) ? currentLbIndex + 1 : 0;
                 openLightbox(currentLbIndex);
-            });\r
-        }\r
-        \r
-        // Clic fuera de la imagen también cierra (cuidado con los botones de flecha)\r
-        lightbox.addEventListener('click', (e) => {\r
-            if(e.target === lightbox || e.target.classList.contains('fp-lightbox-content')) {\r
-                lightbox.classList.remove('visible');\r
-                document.body.style.overflow = 'auto';\r
-            }\r
-        });\r
-    }\r
-\r
-    // =========================================================\r
-    // Interactive Zoom Explorer for Floorplan Images\r
-    // =========================================================\r
-    document.querySelectorAll('.zoom-explore').forEach(container => {\r
-        const img = container.querySelector('img');\r
-        \r
-        container.addEventListener('mousemove', (e) => {\r
-            const rect = container.getBoundingClientRect();\r
-            const x = ((e.clientX - rect.left) / rect.width) * 100;\r
-            const y = ((e.clientY - rect.top) / rect.height) * 100;\r
-            img.style.transformOrigin = `${x}% ${y}%`;\r
-        });\r
-        \r
-        container.addEventListener('mouseleave', () => {\r
-            img.style.transformOrigin = 'center center';\r
-        });\r
-    });\r
-});\r
-\r
-\r
+            });
+        }
+        
+        // Clic fuera de la imagen también cierra (cuidado con los botones de flecha)
+        lightbox.addEventListener('click', (e) => {
+            if(e.target === lightbox || e.target.classList.contains('fp-lightbox-content')) {
+                lightbox.classList.remove('visible');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
+
+    // =========================================================
+    // Interactive Zoom Explorer for Floorplan Images
+    // =========================================================
+    document.querySelectorAll('.zoom-explore').forEach(container => {
+        const img = container.querySelector('img');
+        
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            img.style.transformOrigin = x + '% ' + y + '%';
+        });
+        
+        container.addEventListener('mouseleave', () => {
+            img.style.transformOrigin = 'center center';
+        });
+    });
+});
