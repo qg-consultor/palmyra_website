@@ -2068,5 +2068,15 @@ button {
        font-size: 15px !important;
        line-height: 1.5 !important;
    }
+   
+   /* Galeria Proyecto Mobile */
+   .proyecto-gallery-row {
+       padding: 0 !important;
+   }
+   .gallery-card {
+       min-width: 100% !important;
+       height: auto !important;
+       aspect-ratio: 4/3;
+   }
 }
 
