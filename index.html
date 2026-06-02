@@ -15,6 +15,8 @@
     <!-- jQuery and jquery.ripples for water distortion effect -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/jquery.ripples.min.js"></script>
+    <!-- HLS.js para reproducción de Cloudflare Stream -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
 
@@ -22,9 +24,8 @@
     <section class="hero" id="hero">
         
         <!-- Video Background -->
-        <video autoplay loop muted playsinline class="hero-video-bg">
-            <source src="SECCIONES/HERO/VIDEOS/Palmyra_render_animado_timelapse (01).mp4" type="video/mp4">
-        </video>
+        <video id="heroVideo" autoplay loop muted playsinline class="hero-video-bg"
+            poster="https://customer-pspcmgjur4m25f7o.cloudflarestream.com/3d90ef0c870c663a7192a94d64ba828a/thumbnails/thumbnail.jpg?time=0s&height=600"></video>
         <!-- Navigation Sidebar (Exclusive to Hero Section) -->
         <aside class="hero-sidebar">
             <div class="nav-logo" style="margin-bottom: 20px;">
@@ -119,7 +120,8 @@
                 <!-- Right Image Column -->
                 <div class="proyecto-right-img">
                     <div class="image-wrapper">
-                        <video src="https://res.cloudinary.com/dwkgoevjn/video/upload/v1779048720/Palmyra_Residencial_Cinematic_Intro_q9plvu.mp4" autoplay loop muted playsinline class="main-project-image"></video>
+                        <video id="proyectoVideo" autoplay loop muted playsinline class="main-project-image"
+                            poster="https://customer-pspcmgjur4m25f7o.cloudflarestream.com/6f6980b53f73a9619b7ee8f539184bba/thumbnails/thumbnail.jpg?time=0s&height=600"></video>
                         
                         <!-- Floating Tags like reference -->
                         <div class="floating-tags">
@@ -775,6 +777,29 @@
 
     <!-- Custom JS -->
     <script src="script.js"></script>
+
+    <!-- HLS Video Initialization for Cloudflare Stream -->
+    <script>
+        (function () {
+            var videos = [
+                { id: 'heroVideo', src: 'https://customer-pspcmgjur4m25f7o.cloudflarestream.com/3d90ef0c870c663a7192a94d64ba828a/manifest/video.m3u8' },
+                { id: 'proyectoVideo', src: 'https://customer-pspcmgjur4m25f7o.cloudflarestream.com/6f6980b53f73a9619b7ee8f539184bba/manifest/video.m3u8' }
+            ];
+            videos.forEach(function (v) {
+                var video = document.getElementById(v.id);
+                if (!video) return;
+                if (Hls.isSupported()) {
+                    var hls = new Hls();
+                    hls.loadSource(v.src);
+                    hls.attachMedia(video);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function () { video.play(); });
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    video.src = v.src;
+                    video.addEventListener('loadedmetadata', function () { video.play(); });
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
 
