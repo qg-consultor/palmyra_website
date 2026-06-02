@@ -2058,5 +2058,15 @@ button {
    .contacto-section {
        padding: 40px 15px !important; /* Reduce padding lateral para dar espacio al formulario */
    }
+   
+   .floorplan-title {
+       font-size: 32px !important; /* Previene desbordamiento del título */
+       word-wrap: break-word;
+   }
+   
+   .floorplan-desc {
+       font-size: 15px !important;
+       line-height: 1.5 !important;
+   }
 }
 
