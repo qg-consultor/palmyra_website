@@ -2098,7 +2098,7 @@ button {
        max-width: 100% !important;
        height: 200px !important;
        flex: none !important;
-       border-radius: 12px;
+       border-radius: 0 !important;
    }
 }
 
