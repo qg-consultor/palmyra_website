@@ -2078,5 +2078,27 @@ button {
        height: auto !important;
        aspect-ratio: 4/3;
    }
+   
+   /* Ubicacion Mobile Orden */
+   .place-row {
+       flex-direction: column-reverse !important;
+       gap: 15px !important;
+   }
+   .place-row.reverse {
+       flex-direction: column !important;
+   }
+   .place-info.right-align {
+       flex-direction: row-reverse !important;
+   }
+   .right-align .place-text {
+       text-align: left !important;
+   }
+   .place-img-wrapper, .place-img-wrapper.large-img {
+       width: 100% !important;
+       max-width: 100% !important;
+       height: 200px !important;
+       flex: none !important;
+       border-radius: 12px;
+   }
 }
 
