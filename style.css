@@ -2029,3 +2029,34 @@ button {
     color: #FFFFFF;
 }
 
+@media (max-width: 768px) {
+   .contacto-title {
+       font-size: 32px !important; /* Previene desbordamiento del título */
+       word-wrap: break-word;
+   }
+   .contacto-desc {
+       font-size: 15px;
+   }
+   .contacto-tags {
+       flex-wrap: nowrap !important;
+       gap: 5px !important;
+       justify-content: center !important;
+   }
+   .c-tag {
+       flex: 1;
+       padding: 8px 0px !important;
+       font-size: 11px !important;
+       text-align: center;
+       white-space: nowrap;
+   }
+   .contacto-form-glass {
+       padding: 30px 15px !important;
+       width: 100% !important;
+       max-width: 100% !important;
+       box-sizing: border-box !important;
+   }
+   .contacto-section {
+       padding: 40px 15px !important; /* Reduce padding lateral para dar espacio al formulario */
+   }
+}
+
