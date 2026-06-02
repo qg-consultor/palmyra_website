@@ -15,8 +15,6 @@
     <!-- jQuery and jquery.ripples for water distortion effect -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/jquery.ripples.min.js"></script>
-    <!-- HLS.js para reproducción de Cloudflare Stream -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
 
@@ -778,6 +776,9 @@
     <!-- Custom JS -->
     <script src="script.js"></script>
 
+    <!-- HLS.js para reproducción de Cloudflare Stream (optimizado al final del body) -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
     <!-- HLS Video Initialization for Cloudflare Stream -->
     <script>
         (function () {
@@ -789,13 +790,11 @@
                 var video = document.getElementById(v.id);
                 if (!video) return;
                 if (Hls.isSupported()) {
-                    var hls = new Hls();
+                    var hls = new Hls({ capLevelToPlayerSize: true });
                     hls.loadSource(v.src);
                     hls.attachMedia(video);
-                    hls.on(Hls.Events.MANIFEST_PARSED, function () { video.play(); });
                 } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
                     video.src = v.src;
-                    video.addEventListener('loadedmetadata', function () { video.play(); });
                 }
             });
         })();
