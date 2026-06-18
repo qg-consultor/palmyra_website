@@ -737,7 +737,7 @@ button {
         width: 100% !important;
         order: 1 !important;
     }
-    .mp-header-instruction {
+    #master-plan .mp-header-instruction {
         order: 2 !important;
         width: 100% !important;
         display: flex !important;
