@@ -724,7 +724,7 @@ button {
     }
     /* Master Plan Mobile */
     section#master-plan {
-        padding: 30px 3%;
+        padding: 30px 5% !important; /* Alineado a los márgenes del resto de la página */
         display: flex !important;
         flex-direction: column !important;
         gap: 20px !important; /* Espaciado general base */
@@ -736,6 +736,9 @@ button {
         flex: none !important;
         width: 100% !important;
         order: 1 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
     }
     section#master-plan .mp-header-instruction {
         order: 2 !important;
@@ -743,6 +746,7 @@ button {
         display: flex !important;
         justify-content: center !important;
         margin-top: 45px !important; /* Margen superior solicitado para separar de las fichas */
+        box-sizing: border-box !important;
     }
     section#master-plan .map-wrapper {
         width: 100% !important;
@@ -755,6 +759,8 @@ button {
     #master-plan .map-instruction {
         font-size: 0.85rem !important;
         padding: 8px 18px !important;
+        white-space: normal !important;
+        text-align: center !important;
     }
     #master-plan .stat-card {
         padding: 15px !important;
