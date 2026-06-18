@@ -725,19 +725,29 @@ button {
     /* Master Plan Mobile */
     #master-plan {
         padding: 30px 3%;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important; /* Espaciado general base */
     }
     #master-plan .mp-container {
-        flex-direction: column !important;
-        gap: 25px !important;
-        padding: 10px !important;
+        display: contents !important;
     }
     #master-plan .stats-panel {
         flex: none !important;
         width: 100% !important;
+        order: 1 !important;
+    }
+    .mp-header-instruction {
+        order: 2 !important;
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 45px !important; /* Margen superior solicitado para separar de las fichas */
     }
     #master-plan .map-wrapper {
         width: 100% !important;
         padding-top: 40px !important;
+        order: 3 !important;
     }
     #master-plan .stats-panel h2 {
         font-size: 1.5rem !important;
