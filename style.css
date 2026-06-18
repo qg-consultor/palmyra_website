@@ -701,8 +701,10 @@ button {
         max-width: 100%;
     }
     .proyecto-large-quote {
-        font-size: 22px;
-        line-height: 1.5;
+        font-size: 24px !important;
+        line-height: 1.4 !important;
+        text-align: left;
+        hyphens: none;
     }
     .floating-tags {
         bottom: 10px;
@@ -1115,6 +1117,8 @@ button {
     line-height: 1.4;
     color: #354E3C; /* Modificado color principal */
     letter-spacing: -0.5px;
+    text-align: left;
+    hyphens: none;
 }
 
 .proyecto-large-quote .text-accent {
