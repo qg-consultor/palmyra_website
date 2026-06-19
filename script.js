@@ -1,3 +1,18 @@
+// --- PAGE LOADER LOGIC ---
+(function () {
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('pageLoader');
+    if (!loader) return;
+    function dismissLoader() {
+      loader.classList.add('hidden');
+      loader.addEventListener('transitionend', function () {
+        loader.remove();
+      }, { once: true });
+    }
+    setTimeout(dismissLoader, 2500);
+  });
+})();
+
 $(document).ready(function() {
     
     // 1. Water Ripple Effect Disabled
