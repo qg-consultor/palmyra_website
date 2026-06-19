@@ -1,16 +1,17 @@
 // --- PAGE LOADER LOGIC ---
+// With defer, the DOM is already parsed when this script executes.
+// No need to wait for window 'load' (which delays until all images/videos finish).
+// A 2.2s timer covers the structural load animation, then dismisses the loader.
 (function () {
-  window.addEventListener('load', function () {
-    const loader = document.getElementById('pageLoader');
-    if (!loader) return;
-    function dismissLoader() {
-      loader.classList.add('hidden');
-      loader.addEventListener('transitionend', function () {
-        loader.remove();
-      }, { once: true });
-    }
-    setTimeout(dismissLoader, 2500);
-  });
+  const loader = document.getElementById('pageLoader');
+  if (!loader) return;
+  function dismissLoader() {
+    loader.classList.add('hidden');
+    loader.addEventListener('transitionend', function () {
+      loader.remove();
+    }, { once: true });
+  }
+  setTimeout(dismissLoader, 2200);
 })();
 
 $(document).ready(function() {
@@ -362,26 +363,25 @@ document.addEventListener('DOMContentLoaded', () => {
     'LOTE-211': { const: '181.10', terr: '141.40', status: 'Disponible' }
 };
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const shapes = document.querySelectorAll('.lote-interactivo');
-                shapes.forEach(shape => {
-                    const id = shape.id;
-                    if (id && LOT_DATA[id]) {
-                        shape.setAttribute('data-title', id.replace('-', ' '));
-                        shape.setAttribute('data-const', LOT_DATA[id].const);
-                        shape.setAttribute('data-terr', LOT_DATA[id].terr);
-                        shape.setAttribute('data-status', LOT_DATA[id].status);
-                        
-                        if (LOT_DATA[id].status.toLowerCase() === 'disponible') {
-                            shape.classList.add('lote-disponible', 'lote-activo', 'lote-magico');
-                        } else {
-                            shape.classList.add('lote-vendido', 'lote-activo'); 
-                        }
+        // DOM already ready (inside DOMContentLoaded + defer). Apply lot data after a brief delay for SVG rendering.
+        setTimeout(() => {
+            const shapes = document.querySelectorAll('.lote-interactivo');
+            shapes.forEach(shape => {
+                const id = shape.id;
+                if (id && LOT_DATA[id]) {
+                    shape.setAttribute('data-title', id.replace('-', ' '));
+                    shape.setAttribute('data-const', LOT_DATA[id].const);
+                    shape.setAttribute('data-terr', LOT_DATA[id].terr);
+                    shape.setAttribute('data-status', LOT_DATA[id].status);
+                    
+                    if (LOT_DATA[id].status.toLowerCase() === 'disponible') {
+                        shape.classList.add('lote-disponible', 'lote-activo', 'lote-magico');
+                    } else {
+                        shape.classList.add('lote-vendido', 'lote-activo'); 
                     }
-                });
-            }, 1000); 
-        });
+                }
+            });
+        }, 1000);
 
         document.addEventListener('click', (e) => {
             const lote = e.target.closest('.lote-activo');

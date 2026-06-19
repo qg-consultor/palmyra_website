@@ -22,17 +22,19 @@
     <link rel="icon" type="image/png" href="LOGOS/Favicon.png">
     <link rel="apple-touch-icon" href="LOGOS/Favicon.png">
     <link rel="shortcut icon" href="LOGOS/Favicon.png">
-    <!-- Google Fonts: Montserrat & Inter -->
+    <!-- Google Fonts: Libre Baskerville & Nunito Sans (async preload) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap"></noscript>
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css?v=7">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=8">
+    <!-- FontAwesome for Icons (async preload) -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <!-- jQuery and jquery.ripples for water distortion effect -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/jquery.ripples.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/jquery.ripples.min.js" defer></script>
 </head>
 <body>
 
@@ -809,14 +811,18 @@
     </section>
 
     <!-- Custom JS -->
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
 
     <!-- HLS.js para reproducción de Cloudflare Stream (optimizado al final del body) -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest" defer></script>
 
     <!-- HLS Video Initialization for Cloudflare Stream -->
     <script>
-        (function () {
+        function initHlsVideos() {
+            if (typeof Hls === 'undefined') {
+                setTimeout(initHlsVideos, 100);
+                return;
+            }
             var videos = [
                 { id: 'heroVideo', src: 'https://customer-pspcmgjur4m25f7o.cloudflarestream.com/3d90ef0c870c663a7192a94d64ba828a/manifest/video.m3u8' },
                 { id: 'proyectoVideo', src: 'https://customer-pspcmgjur4m25f7o.cloudflarestream.com/6f6980b53f73a9619b7ee8f539184bba/manifest/video.m3u8' }
@@ -832,7 +838,12 @@
                     video.src = v.src;
                 }
             });
-        })();
+        }
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initHlsVideos);
+        } else {
+            initHlsVideos();
+        }
     </script>
 </body>
 </html>
